@@ -7,6 +7,12 @@ resource "aws_lambda_function" "instance" {
   timeout       = 30   // seconds
   memory_size   = 1536 // MB
 
+  environment {
+    variables = {
+      ELEVATORS_DATA_S3_BUCKET = aws_s3_bucket.instance.bucket
+    }
+  }
+
   // Since CI/CD will deploy this application externally, these do not need to be tracked after creation
   lifecycle {
     ignore_changes = [
