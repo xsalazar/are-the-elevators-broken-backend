@@ -58,11 +58,11 @@ jobs:
         working-directory: ./app
 
       - name: Upload Deployment Package to S3 ☁️
-        run: aws s3 cp ./lambda.zip s3://image-slicer/lambda.zip
+        run: aws s3 cp ./lambda.zip s3://are-the-elevators-broken/lambda.zip
         working-directory: ./app
 
       - name: Deploy Lambda Function 🚀
         env:
           LAMBDA_FUNCTION_NAME: ${{ env.LAMBDA_FUNCTION_NAME }}
-        run: aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --s3-bucket image-slicer --s3-key lambda.zip
+        run: aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --s3-bucket are-the-elevators-broken --s3-key lambda.zip
         working-directory: ./app
