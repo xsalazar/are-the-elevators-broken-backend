@@ -52,7 +52,7 @@ exports.handler = async (event, context) => {
     }
 
     const isBroken = body.isBroken;
-    if (typeof isBroken !== boolean) {
+    if (typeof isBroken !== "boolean") {
       return errorResponse;
     }
 
