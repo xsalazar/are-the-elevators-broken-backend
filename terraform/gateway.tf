@@ -2,10 +2,30 @@ resource "aws_apigatewayv2_api" "instance" {
   name          = "are-the-elevators-broken-api-gateway"
   protocol_type = "HTTP"
   cors_configuration {
-    allow_origins = ["https://xsalazar.dev", "https://aretheelevatorsbroken.com", "*"]
+    allow_origins = ["https://aretheelevatorsbroken.com", "*"]
     allow_methods = ["GET", "PUT"]
     allow_headers = ["*"]
   }
+}
+
+resource "aws_apigatewayv2_api_mapping" "instance" {
+  api_id      = aws_apigatewayv2_api.instance.id
+  domain_name = aws_apigatewayv2_domain_name.instance.id
+  stage       = "$default"
+}
+
+resource "aws_apigatewayv2_domain_name" "instance" {
+  domain_name = "backend.aretheelevatorsbroken.com"
+
+  domain_name_configuration {
+    certificate_arn = data.aws_acm_certificate.instance.arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
+  }
+}
+
+data "aws_acm_certificate" "instance" {
+  domain = "*.aretheelevatorsbroken.com"
 }
 
 resource "aws_apigatewayv2_integration" "instance" {
