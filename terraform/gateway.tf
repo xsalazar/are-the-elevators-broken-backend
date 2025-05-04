@@ -2,7 +2,7 @@ resource "aws_apigatewayv2_api" "instance" {
   name          = "are-the-elevators-broken-api-gateway"
   protocol_type = "HTTP"
   cors_configuration {
-    allow_origins = ["https://aretheelevatorsbroken.com", "*"]
+    allow_origins = ["https://aretheelevatorsbroken.com"]
     allow_methods = ["GET", "PUT"]
     allow_headers = ["*"]
   }
