@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Bootstrap:
+  deploy-application:
     name: Deploy Application
     runs-on: ubuntu-latest
 
